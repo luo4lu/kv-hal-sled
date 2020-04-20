@@ -11,6 +11,7 @@ pub struct SledStorage {
 
 impl SledStorage {
     pub fn new(string: &str) -> Self {
+        //   let s = String::from(string.as_ref());
         let db = sled::open(string).unwrap();
         SledStorage { db, fd: Vec::new() }
     }
@@ -28,6 +29,7 @@ impl Storage for SledStorage {
     {
         let f = Vec::from(field.as_ref());
         self.fd = f;
+        //    println!("{}", f.encode_hex::<String>());
     }
 
     async fn set<K, V>(&mut self, key: K, value: V) -> Result<Option<Self::Value>, Self::Error>
